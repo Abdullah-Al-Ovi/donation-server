@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import connectDB from './utils/connectDB.js';
 import donationDetailsRoutes from "./routes/donationDetails.route.js"
+import paymentRoutes from "./routes/payment.router.js"
 dotenv.config();
 
 connectDB();
@@ -31,6 +32,7 @@ app.listen(process.env.PORT || 8080, () => {
   console.log(`Server is running on port ${process.env.PORT}!`);
 });
 app.use('/api/donation', donationDetailsRoutes);
+app.use('/api/payment', paymentRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

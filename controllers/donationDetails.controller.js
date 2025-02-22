@@ -29,7 +29,7 @@ export const addDonationDetails = asyncHandler(async (req, res) => {
 export const getAllDonationDetails = asyncHandler(async (req, res) => {
     const allDonations = await DonationDetails.find();
 
-    if (!allDonations) {
+    if (allDonations.length === 0) {
         throw new ApiError(404, "Donations not found");
     }
 

@@ -9,7 +9,8 @@ const paymentSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
-      trim: true
+      trim: true,
+      required: true
     },
     amount: {
       type: String,
