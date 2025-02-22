@@ -1,18 +1,12 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import connectDB from './utils/connectDB.js';
+import donationDetailsRoutes from "./routes/donationDetails.route.js"
 dotenv.config();
 
-mongoose
-  .connect(process.env.MONGO)
-  .then(() => {
-    console.log('Connected to MongoDB');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+connectDB();
 
 const __dirname = path.resolve();
 
@@ -36,7 +30,7 @@ app.use(cookieParser());
 app.listen(process.env.PORT || 8080, () => {
   console.log(`Server is running on port ${process.env.PORT}!`);
 });
-
+app.use('/api/donation', donationDetailsRoutes);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

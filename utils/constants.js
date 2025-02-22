@@ -15,4 +15,6 @@ export const ACCEPTED_FILE_TYPES = [
     'image/svg+xml',
     'image/x-icon',
   ];
+
+  export const fileUrl = "http://localhost:8080";
   
