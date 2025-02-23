@@ -44,6 +44,27 @@ export const getDonationDetailsById = asyncHandler(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, donation, "Donation found successfully"));
 });
 
+export const getCategories = asyncHandler(async (req, res) => {
+    const categories = await DonationDetails.distinct('category');
+
+    if (categories.length === 0) {
+        throw new ApiError(404, "Categories not found");
+    }
+
+    return res.status(200).json(new ApiResponse(200, categories, "Categories found successfully"));
+});
+
+export const getDonationDetailsByCategory = asyncHandler(async (req, res) => {
+    const { category } = req.params;
+    const donations = await DonationDetails.find({ category });
+
+    if (donations.length === 0) {
+        throw new ApiError(404, "Donations not found for the specified category");
+    }
+
+    return res.status(200).json(new ApiResponse(200, donations, "Donations found successfully"));
+});
+
 export const updateDonationDetails = asyncHandler(async (req, res) => {
     const { id } = req.params;
 
@@ -62,4 +83,5 @@ export const updateDonationDetails = asyncHandler(async (req, res) => {
 
     return res.status(200).json(new ApiResponse(200, updatedDonation, "Donation updated successfully"));
 });
+
 
